@@ -25,10 +25,11 @@ exports.updateUserRole = async (req, res) => {
     const { role } = req.body;
 
     // Validate role
-    if (!role || !['super admin', 'admin', 'user'].includes(role)) {
+    const validRoles = ['super admin', 'project admin', 'user'];
+    if (!role || !validRoles.includes(role)) {
       return res.status(400).json({
         status: 'error',
-        message: 'Please provide a valid role (super admin, admin, or user)'
+        message: `Please provide a valid role (${validRoles.join(', ')})`
       });
     }
 
